@@ -1,4 +1,4 @@
-package com.grupo1.pos.service;
+package com.grupo1.pos.service.impl;
 
 import com.grupo1.pos.model.Producto;
 
