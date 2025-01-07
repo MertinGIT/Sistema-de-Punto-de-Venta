@@ -2,9 +2,10 @@ package com.grupo1.pos.controller;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,52 +22,64 @@ import java.util.Map;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private static final String SECRET_KEY = "8f3a1b6d12a4455c7a8e9c4dbe4e22fcb9b5640a2cf4b3b0f8eebd77c423d8b7";  // Use a strong secret key
-    private static final long EXPIRATION_TIME = 86400000L;  // 1 day
+    public SecretKey getSecretKey() {
+        return secretKey;
+    }
+
+    private  SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256); // Secret key for HS256
+    private static final long EXPIRATION_TIME = 86400000L; // 1 day expiration
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests(request ->
-                request.requestMatchers("/auth/login", "/auth/register").permitAll().anyRequest().authenticated()) // Permitir acceso a login y register    sin autenticación
-                .csrf(csrf -> csrf.disable());
+                .csrf(csrf -> csrf.disable()) // Desactivar CSRF
+                .authorizeRequests(auth -> auth
+                        .requestMatchers("/auth/login", "/auth/register").permitAll() // Public routes
+                        .requestMatchers(HttpMethod.PUT, "/auth/**").hasRole("ADMINISTRADOR") // Admin only for PUT
+                        .requestMatchers(HttpMethod.DELETE, "/auth/**").hasRole("ADMINISTRADOR") // Admin only for DELETE
+                        .anyRequest().authenticated() // Other requests require authentication
+                )
+                .addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class); // Add JWT filter before authentication filter
+
         return http.build();
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();  // Use BCrypt for password encoding
+        return new BCryptPasswordEncoder(); // BCrypt for password encoding
+    }
+
+    @Bean
+    public JwtAuthorizationFilter jwtAuthorizationFilter() {
+        return new JwtAuthorizationFilter(); // JWT authorization filter
     }
 
     // Method to generate JWT token
     public String generateToken(String email, String role) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("role", role);
+        claims.put("role", role); // Add role to claims
 
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(email)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .signWith(secretKey) // Use the secret key for signing
                 .compact();
     }
 
     // Method to validate the token
     public boolean validateToken(String token) {
         try {
-            Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token);
-            return true;  // Valid token
-        } catch (JwtException | IllegalArgumentException e) {
-            return false;  // Invalid token
+            Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token); // Use parserBuilder
+            return true; // Token is valid
+        } catch (Exception e) {
+            return false; // Token is invalid
         }
     }
 
     // Method to extract email from the token
     public String getEmailFromToken(String token) {
-        return Jwts.parser()
-                .setSigningKey(SECRET_KEY)
-                .parseClaimsJws(token)
-                .getBody()
-                .getSubject();
+        return Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody().getSubject();
     }
 }
