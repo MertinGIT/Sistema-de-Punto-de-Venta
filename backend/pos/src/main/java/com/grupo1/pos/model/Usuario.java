@@ -19,10 +19,20 @@ public class Usuario {
 
     @Column(nullable = false, length = 20)
     private String rol; // "vendedor" o "administrador"
+    @Column(nullable = false)
+    private String password; // Contraseña del usuario
+
+    public String getPassword() {
+        return password;
+    }
 
     // Getters and setters
     public Long getId() {
         return id;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setId(Long id) {

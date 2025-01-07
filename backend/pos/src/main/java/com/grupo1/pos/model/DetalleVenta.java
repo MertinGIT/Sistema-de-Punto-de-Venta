@@ -63,4 +63,11 @@ public class DetalleVenta {
     public void setSubtotal(Double subtotal) {
         this.subtotal = subtotal;
     }
+    public double getIva10(){
+        return getSubtotal()/10;
+    }
+    public double getIva5(){
+        return getSubtotal()/11;
+    }
+
 }
