@@ -1,6 +1,7 @@
 package com.grupo1.pos.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import java.util.Date;
 import java.util.List;
 
@@ -12,17 +13,22 @@ public class Venta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "La fecha es obligatoria")
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date fecha;
 
+
+    @NotNull(message = "El usuario es obligatorio")
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
+    @NotNull
     @Column(nullable = false)
     private Double montoTotal;
 
+    @NotNull(message = "El método de pago es obligatorio")
     @Column(nullable = false, length = 20)
     private String metodoPago; // Ejemplo: "efectivo", "tarjeta"
 

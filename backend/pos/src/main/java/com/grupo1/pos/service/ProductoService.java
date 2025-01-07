@@ -1,4 +1,4 @@
-package com.grupo1.pos.service.impl;
+package com.grupo1.pos.service;
 
 import com.grupo1.pos.model.Producto;
 
@@ -8,6 +8,10 @@ import java.util.Optional;
 public interface ProductoService {
 
     List<Producto> getProductos();
+
+    Producto getProductoByNombre(String nombre);
+
+    Producto getProductoByCodigoBarra(String codigoBarra);
 
     Optional<Producto> getProductoById(Long id);
 

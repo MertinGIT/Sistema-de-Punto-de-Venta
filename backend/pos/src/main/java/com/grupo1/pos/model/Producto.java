@@ -1,9 +1,9 @@
 package com.grupo1.pos.model;
 
 import jakarta.persistence.*;
-//import jakarta.validation.constraints.*;
-import org.antlr.v4.runtime.misc.NotNull;
-//import org.antlr.v4.runtime.misc.NotNull;
+import jakarta.validation.constraints.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -12,28 +12,30 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //@NotNull(message = "El nombre es obligatorio")
-    //@Size(max = 100, message = "El nombre debe tener máximo 100 caracteres")
+    @NotNull(message = "El nombre es obligatorio")
+    @Size(max = 100, message = "El nombre debe tener máximo 100 caracteres")
     @Column(length = 100, nullable = false)
     private String nombre;
 
-    //@DecimalMin(value = "0.0", inclusive = false, message = "El precio debe ser mayor que cero")
+    @DecimalMin(value = "0.0", inclusive = false, message = "El precio debe ser mayor que cero")
     @Column(nullable = false)
     private Double precio;
 
-    //@NotNull(message = "El stock es obligatorio")
-   // @Min(value = 0, message = "El stock no puede ser negativo")
+    @NotNull(message = "El stock es obligatorio")
+    @Min(value = 0, message = "El stock no puede ser negativo")
     @Column(nullable = false)
     private Long stock;
 
-    //@Pattern(regexp = "^[0-9]{13}$", message = "El código de barras debe ser un número de 13 dígitos")
     @Column(unique = true)
     private String codigoBarras;
 
     @NotNull
-   // @Size(max = 50, message = "La categoría debe tener máximo 50 caracteres")
+    @Size(max = 50, message = "La categoría debe tener máximo 50 caracteres")
     @Column(length = 50, nullable = false)
     private String categoria;
+
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+    private List<DetalleVenta> detalles;
 
     public Producto() {}
 
