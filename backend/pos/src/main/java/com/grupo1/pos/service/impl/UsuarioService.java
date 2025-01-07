@@ -14,9 +14,10 @@ import java.util.Optional;
 @Service
 public class UsuarioService {
     private final UserRepository userRepository;
-    private SecurityConfig securityConfig;
-    public UsuarioService(UserRepository userRepository) {
+    private final SecurityConfig securityConfig;
+    public UsuarioService(UserRepository userRepository, SecurityConfig securityConfig) {
         this.userRepository = userRepository;
+        this.securityConfig = securityConfig;
     }
 
     public List<Usuario> getUsuarios() {

@@ -35,8 +35,8 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // Desactivar CSRF
                 .authorizeRequests(auth -> auth
                         .requestMatchers("/auth/login", "/auth/register").permitAll() // Public routes
-                        .requestMatchers(HttpMethod.PUT, "/auth/**").hasRole("ADMINISTRADOR") // Admin only for PUT
-                        .requestMatchers(HttpMethod.DELETE, "/auth/**").hasRole("ADMINISTRADOR") // Admin only for DELETE
+                        .requestMatchers(HttpMethod.PUT, "/auth/**").hasAuthority("ADMINISTRADOR") // Admin only for PUT
+                        .requestMatchers(HttpMethod.DELETE, "/auth/**").hasAuthority("ADMINISTRADOR") // Admin only for DELETE
                         .anyRequest().authenticated() // Other requests require authentication
                 )
                 .addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class); // Add JWT filter before authentication filter
