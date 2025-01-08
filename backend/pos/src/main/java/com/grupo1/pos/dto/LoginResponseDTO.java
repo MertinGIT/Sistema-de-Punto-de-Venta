@@ -1,4 +1,4 @@
-package com.grupo1.pos.controller;
+package com.grupo1.pos.dto;
 
 public class LoginResponseDTO {
 

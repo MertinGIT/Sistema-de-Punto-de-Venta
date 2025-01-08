@@ -1,7 +1,10 @@
 package com.grupo1.pos.controller;
 
+import com.grupo1.pos.dto.LoginRequestDTO;
+import com.grupo1.pos.dto.LoginResponseDTO;
+import com.grupo1.pos.dto.RegisterRequestDTO;
 import com.grupo1.pos.model.Usuario;
-import com.grupo1.pos.service.impl.UserRepository;
+import com.grupo1.pos.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,11 +15,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class AuthController {
 
     private final SecurityConfig securityConfig;
-    private final UserRepository userRepository;
+    private final UsuarioRepository userRepository;
     PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Autowired
-    public AuthController(SecurityConfig securityConfig, UserRepository userRepository) {
+    public AuthController(SecurityConfig securityConfig, UsuarioRepository userRepository) {
         this.securityConfig = securityConfig;
         this.userRepository = userRepository;
     }

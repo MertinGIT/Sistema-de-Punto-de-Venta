@@ -2,6 +2,9 @@ package com.grupo1.pos.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 @Table(name = "usuario")
@@ -21,6 +24,9 @@ public class Usuario {
     private String rol; // "vendedor" o "administrador"
     @Column(nullable = false)
     private String password; // Contraseña del usuario
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Venta> ventas = new ArrayList<>();
 
     public String getPassword() {
         return password;
