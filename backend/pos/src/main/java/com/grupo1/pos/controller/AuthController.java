@@ -93,7 +93,7 @@ public class AuthController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> eliminarUsuario(@PathVariable Long id, @RequestHeader("Authorization") String token) {
         // Verificar si el usuario tiene rol de ADMINISTRADOR
-
+        System.out.println("Token recibido en eliminarUsuario: " + token);
         if (!usuarioService.isAdmin(token)) {
             return ResponseEntity.status(403).body("Access denied: Only administrators can delete users");
         }
