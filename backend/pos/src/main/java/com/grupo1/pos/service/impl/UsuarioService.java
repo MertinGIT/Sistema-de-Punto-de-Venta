@@ -1,8 +1,8 @@
 package com.grupo1.pos.service.impl;
 import com.grupo1.pos.controller.SecurityConfig;
-import com.grupo1.pos.controller.UsuarioDTO;
+import com.grupo1.pos.dto.UsuarioDTO;
 import com.grupo1.pos.model.Usuario;
-import com.grupo1.pos.repository.UserRepository;
+import com.grupo1.pos.repository.UsuarioRepository;
 //import org.apache.catalina.security.SecurityConfig;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -13,9 +13,9 @@ import java.util.Optional;
 
 @Service
 public class UsuarioService {
-    private final UserRepository userRepository;
+    private final UsuarioRepository userRepository;
     private final SecurityConfig securityConfig;
-    public UsuarioService(UserRepository userRepository, SecurityConfig securityConfig) {
+    public UsuarioService(UsuarioRepository userRepository, SecurityConfig securityConfig) {
         this.userRepository = userRepository;
         this.securityConfig = securityConfig;
     }

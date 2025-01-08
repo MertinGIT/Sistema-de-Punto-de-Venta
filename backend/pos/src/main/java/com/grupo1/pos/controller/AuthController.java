@@ -1,8 +1,8 @@
 package com.grupo1.pos.controller;
 
-import com.grupo1.pos.controller.LoginRequestDTO;
-import com.grupo1.pos.controller.LoginResponseDTO;
-import com.grupo1.pos.controller.RegisterRequestDTO;
+import com.grupo1.pos.dto.LoginRequestDTO;
+import com.grupo1.pos.dto.LoginResponseDTO;
+import com.grupo1.pos.dto.RegisterRequestDTO;
 import com.grupo1.pos.model.Usuario;
 import com.grupo1.pos.repository.UsuarioRepository;
 import com.grupo1.pos.service.impl.UsuarioService;
