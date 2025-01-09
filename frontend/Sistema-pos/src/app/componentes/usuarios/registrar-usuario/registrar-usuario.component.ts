@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { Usuario } from '../usuario';
-import { UsuarioService } from '../usuario.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms'; // Import FormsModule
 import { CommonModule } from '@angular/common';
+import { Usuario } from '../../../entidades/usuario';
+import { UsuarioService } from '../../../servicios/usuarios/usuario.service';
 
 @Component({
   selector: 'app-registrar-usuario',

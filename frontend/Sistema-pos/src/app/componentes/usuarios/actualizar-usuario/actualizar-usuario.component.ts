@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Usuario } from '../usuario';
-import { UsuarioService } from '../usuario.service';
+import { Usuario } from '../../../entidades/usuario';
+import { UsuarioService } from '../../../servicios/usuarios/usuario.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { catchError, of, tap } from 'rxjs';

@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.component';
-import { RegistrarUsuarioComponent } from './registrar-usuario/registrar-usuario.component';
-import { ActualizarUsuarioComponent } from './actualizar-usuario/actualizar-usuario.component';
+import { ActualizarUsuarioComponent } from './componentes/usuarios/actualizar-usuario/actualizar-usuario.component';
+import { ListaUsuariosComponent } from './componentes/usuarios/lista-usuarios/lista-usuarios.component';
+import { RegistrarUsuarioComponent } from './componentes/usuarios/registrar-usuario/registrar-usuario.component';
 export const routes: Routes = [
   { path: 'usuarios', component: ListaUsuariosComponent }, 
   { path: '', redirectTo: 'usuarios', pathMatch: 'full' },

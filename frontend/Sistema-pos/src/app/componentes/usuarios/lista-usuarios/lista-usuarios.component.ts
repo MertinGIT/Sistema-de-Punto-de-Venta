@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from '../usuario';
 import { CommonModule } from '@angular/common';
-import { UsuarioService } from '../usuario.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { Usuario } from '../../../entidades/usuario';
+import { UsuarioService } from '../../../servicios/usuarios/usuario.service';
 
 @Component({
   selector: 'app-lista-usuarios',
