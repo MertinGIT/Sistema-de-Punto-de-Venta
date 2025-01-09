@@ -13,9 +13,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(
+        origins = {"http://localhost:4200/"}
+)
 @RequestMapping("/auth")
 public class AuthController {
     private final UsuarioServiceImpl usuarioService;
@@ -29,7 +33,11 @@ public class AuthController {
         this.usuarioRepository = usuarioRepository;
         this.usuarioService = usuarioService;
     }
-
+    @GetMapping({"/listar"})
+    public ResponseEntity<?> listarUsuarios() {
+        List<Usuario> usuarios = this.usuarioRepository.findAll();
+        return ResponseEntity.ok(usuarios);
+    }
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequestDTO request) {
         // Buscar el usuario por email
@@ -87,7 +95,7 @@ public class AuthController {
         }
 
         usuarioRepository.save(usuario);
-        return ResponseEntity.ok("User updated successfully");
+        return ResponseEntity.ok("User registered successfully");
     }
 
     @DeleteMapping("/{id}")

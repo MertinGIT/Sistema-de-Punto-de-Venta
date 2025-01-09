@@ -1,0 +1,17 @@
+<h2 class="text-center">Lista Usuarios</h2>
+<table class="table table-striped">
+  <thead class="table-dark"> <!-- Cambia "head" por "thead" -->
+    <tr>
+      <th>Nombre</th>
+      <th>Email</th>
+      <th>Rol</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let u of user">
+      <td>{{ u.nombre }}</td>
+      <td>{{ u.email }}</td>
+      <td>{{ u.rol }}</td>
+    </tr>
+  </tbody>
+</table>

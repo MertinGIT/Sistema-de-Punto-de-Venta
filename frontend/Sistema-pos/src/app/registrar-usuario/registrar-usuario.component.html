@@ -1,0 +1,94 @@
+<div class="col-md-6 offset-md-3">
+    <h3 class="text-center">Registro de usuario</h3>
+    <form (ngSubmit)="onSubmit()" #usuarioForm="ngForm">
+      
+      <div class="form-group">
+        <label>Nombre: </label>
+        <input
+          type="text"
+          class="form-control"
+          id="nombre"
+          [(ngModel)]="usuario.nombre"
+          name="nombre"
+          required
+          minlength="4"
+          maxlength="10"
+          placeholder="Digite su nombre"
+          #nombre="ngModel"
+        />
+        <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+          <div *ngIf="nombre.errors?.['required']">
+            Digite su nombre por favor
+          </div>
+          <div *ngIf="nombre.errors?.['minlength']">
+            El nombre tiene que contener como mínimo 4 caracteres
+          </div>
+          <div *ngIf="nombre.errors?.['maxlength']">
+            El nombre tiene que tener como máximo 10 caracteres
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label>Email: </label>
+        <input
+          type="text"
+          class="form-control"
+          id="email"
+          [(ngModel)]="usuario.email"
+          name="email"
+          required
+          minlength="4"
+          placeholder=" "
+          #email="ngModel"
+        />
+        <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+          <div *ngIf="email.errors?.['required']">
+            Digite su email por favor
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label>Password: </label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          [(ngModel)]="usuario.password"
+          name="password"
+          required
+          placeholder="Ingrese una contraseña"
+          #password="ngModel"
+        />
+        <div class="alert alert-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
+          <div *ngIf="password.errors?.['required']">
+            Ingrese una contraseña por favor
+          </div>
+        </div>
+      </div>
+  
+      <!-- Combobox for role selection -->
+      <div class="form-group">
+        <label>Rol: </label>
+        <select
+          class="form-control"
+          [(ngModel)]="usuario.rol"
+          name="rol"
+          required
+          #rol="ngModel"
+        >
+          <option value="ADMINISTRADOR">ADMINISTRADOR</option>
+          <option value="VENDEDOR">VENDEDOR</option>
+        </select>
+        <div class="alert alert-danger" *ngIf="rol.invalid && (rol.dirty || rol.touched)">
+          <div *ngIf="rol.errors?.['required']">
+            Seleccione un rol
+          </div>
+        </div>
+      </div>
+  
+      <button class="btn btn-success" [disabled]="!usuarioForm.form.valid">Guardar</button>
+    </form>
+  </div>
+  
