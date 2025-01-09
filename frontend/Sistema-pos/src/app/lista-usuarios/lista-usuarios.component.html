@@ -5,6 +5,7 @@
       <th>Nombre</th>
       <th>Email</th>
       <th>Rol</th>
+      <th>Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -12,6 +13,12 @@
       <td>{{ u.nombre }}</td>
       <td>{{ u.email }}</td>
       <td>{{ u.rol }}</td>
+      <td>
+        <button (click)= "actualizarUsuario(u.id)" class="btn btn-info">Editar</button>
+        <button (click)= "eliminarUsuario(u.id)" class="btn btn-danger" style="margin-left : 10px;">Eliminar</button>
+        <!--<button (click)= "verDetallesDelEmpleado(empleado.id)" class="btn btn-primary" style="margin-left : 10px;">Detalles</button> -->    
+      </td>
     </tr>
+
   </tbody>
 </table>
