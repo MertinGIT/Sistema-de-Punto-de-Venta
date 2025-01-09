@@ -1,5 +1,6 @@
 package com.grupo1.pos.controller;
 
+import com.grupo1.pos.dto.VentaDTO;
 import com.grupo1.pos.model.Venta;
 import com.grupo1.pos.service.VentaService;
 import jakarta.validation.Valid;
@@ -24,15 +25,15 @@ public class VentaController {
 
     // Obtener todas los ventas
     @GetMapping
-    public ResponseEntity<List<Venta>> getVentas() {
-        List<Venta> ventas = ventaService.getVentas();
+    public ResponseEntity<List<VentaDTO>> getVentas() {
+        List<VentaDTO> ventas = ventaService.getVentas();
         return new ResponseEntity<>(ventas, HttpStatus.OK);
     }
 
     // Obtener venta por ID
     @GetMapping("/{id}")
-    public ResponseEntity<Venta> getVentaById(@PathVariable Long id) {
-        Optional<Venta> venta = ventaService.getVentaById(id);
+    public ResponseEntity<VentaDTO> getVentaById(@PathVariable Long id) {
+        Optional<VentaDTO> venta = ventaService.getVentaById(id);
         return venta.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .build());
@@ -40,16 +41,16 @@ public class VentaController {
 
     // Agregar una nueva venta
     @PostMapping
-    public ResponseEntity<Venta> agregarVenta(@Valid @RequestBody Venta venta) {
-        Venta nuevaVenta = ventaService.agregarVenta(venta);
+    public ResponseEntity<VentaDTO> agregarVenta(@Valid @RequestBody VentaDTO ventaDTO) {
+        VentaDTO nuevaVenta = ventaService.agregarVenta(ventaDTO);
         return new ResponseEntity<>(nuevaVenta, HttpStatus.CREATED);
     }
 
     // Actualizar una venta existente
     @PutMapping("/{id}")
-    public ResponseEntity<Venta> actualizarVenta(@PathVariable Long id, @RequestBody Venta venta) {
+    public ResponseEntity<VentaDTO> actualizarVenta(@PathVariable Long id, @RequestBody VentaDTO ventaDTO) {
         try {
-            Venta ventaActualizada = ventaService.actualizarVenta(id, venta);
+            VentaDTO ventaActualizada = ventaService.actualizarVenta(id, ventaDTO);
             return new ResponseEntity<>(ventaActualizada, HttpStatus.OK);
         } catch (RuntimeException ex) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

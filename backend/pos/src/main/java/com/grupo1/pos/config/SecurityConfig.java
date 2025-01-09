@@ -1,5 +1,6 @@
-package com.grupo1.pos.controller;
+package com.grupo1.pos.config;
 
+import com.grupo1.pos.controller.JwtAuthorizationFilter;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;

@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="mapstruct.processor" type="repository">
+    <properties maven-id="org.mapstruct:mapstruct-processor:1.5.3.Final" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.3.Final/mapstruct-processor-1.5.3.Final.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

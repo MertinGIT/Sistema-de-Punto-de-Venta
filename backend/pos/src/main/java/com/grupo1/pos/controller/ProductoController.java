@@ -1,7 +1,8 @@
 package com.grupo1.pos.controller;
 
-import com.grupo1.pos.model.Producto;
+import com.grupo1.pos.dto.ProductoDTO;
 import com.grupo1.pos.service.ProductoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,15 +24,15 @@ public class ProductoController {
 
     // Obtener todos los productos
     @GetMapping
-    public ResponseEntity<List<Producto>> getProductos() {
-        List<Producto> productos = productoService.getProductos();
+    public ResponseEntity<List<ProductoDTO>> getProductos() {
+        List<ProductoDTO> productos = productoService.getProductos();
         return new ResponseEntity<>(productos, HttpStatus.OK);
     }
 
     // Obtener producto por ID
     @GetMapping("/{id}")
-    public ResponseEntity<Producto> getProductoById(@PathVariable Long id) {
-        Optional<Producto> producto = productoService.getProductoById(id);
+    public ResponseEntity<ProductoDTO> getProductoById(@PathVariable Long id) {
+        Optional<ProductoDTO> producto = productoService.getProductoById(id);
         return producto.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND)
                         .build());
@@ -39,16 +40,16 @@ public class ProductoController {
 
     // Agregar un nuevo producto
     @PostMapping
-    public ResponseEntity<Producto> agregarProducto(@RequestBody Producto producto) {
-        Producto nuevoProducto = productoService.agregarProducto(producto);
+    public ResponseEntity<ProductoDTO> agregarProducto(@Valid @RequestBody ProductoDTO productoDTO) {
+        ProductoDTO nuevoProducto = productoService.agregarProducto(productoDTO);
         return new ResponseEntity<>(nuevoProducto, HttpStatus.CREATED);
     }
 
     // Actualizar un producto existente
     @PutMapping("/{id}")
-    public ResponseEntity<Producto> actualizarProducto(@PathVariable Long id, @RequestBody Producto producto) {
+    public ResponseEntity<ProductoDTO> actualizarProducto(@PathVariable Long id, @RequestBody ProductoDTO productoDTO) {
         try {
-            Producto productoActualizado = productoService.actualizarProducto(id, producto);
+            ProductoDTO productoActualizado = productoService.actualizarProducto(id, productoDTO);
             return new ResponseEntity<>(productoActualizado, HttpStatus.OK);
         } catch (RuntimeException ex) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -66,3 +67,4 @@ public class ProductoController {
         }
     }
 }
+

@@ -1,5 +1,6 @@
 package com.grupo1.pos.service;
 
+import com.grupo1.pos.dto.VentaDTO;
 import com.grupo1.pos.model.Venta;
 
 import java.util.Date;
@@ -8,17 +9,17 @@ import java.util.Optional;
 
 public interface VentaService {
 
-    List<Venta> getVentas();
+    List<VentaDTO> getVentas();
 
-    Optional<Venta> getVentaById(Long id);
+    Optional<VentaDTO> getVentaById(Long id);
 
-    List<Venta> getVentasByFechaBetween(Date fechaInicial, Date fechaFinal);
+    List<VentaDTO> getVentasByFechaBetween(Date fechaInicial, Date fechaFinal);
 
-    List<Venta> getVentasByMetodoPago(String metodoPago);
+    List<VentaDTO> getVentasByMetodoPago(String metodoPago);
 
-    Venta agregarVenta(Venta venta);
+    VentaDTO agregarVenta(VentaDTO ventaDTO);
 
-    Venta actualizarVenta(Long id, Venta venta);
+    VentaDTO actualizarVenta(Long id, VentaDTO ventaDTO);
 
     void eliminarVenta(Long id);
 }

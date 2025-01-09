@@ -1,7 +1,7 @@
 package com.grupo1.pos.controller;
 
+import com.grupo1.pos.config.SecurityConfig;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,7 +15,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
 

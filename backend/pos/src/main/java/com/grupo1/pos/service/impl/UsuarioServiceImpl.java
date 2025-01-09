@@ -1,5 +1,5 @@
 package com.grupo1.pos.service.impl;
-import com.grupo1.pos.controller.SecurityConfig;
+import com.grupo1.pos.config.SecurityConfig;
 import com.grupo1.pos.dto.UsuarioDTO;
 import com.grupo1.pos.model.Usuario;
 import com.grupo1.pos.repository.UsuarioRepository;
@@ -12,10 +12,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UsuarioService {
+public class UsuarioServiceImpl {
     private final UsuarioRepository userRepository;
     private final SecurityConfig securityConfig;
-    public UsuarioService(UsuarioRepository userRepository, SecurityConfig securityConfig) {
+    public UsuarioServiceImpl(UsuarioRepository userRepository, SecurityConfig securityConfig) {
         this.userRepository = userRepository;
         this.securityConfig = securityConfig;
     }

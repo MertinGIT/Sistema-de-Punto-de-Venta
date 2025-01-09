@@ -5,8 +5,8 @@ import com.grupo1.pos.dto.LoginResponseDTO;
 import com.grupo1.pos.dto.RegisterRequestDTO;
 import com.grupo1.pos.model.Usuario;
 import com.grupo1.pos.repository.UsuarioRepository;
-import com.grupo1.pos.service.impl.UsuarioService;
-import com.grupo1.pos.controller.SecurityConfig;
+import com.grupo1.pos.service.impl.UsuarioServiceImpl;
+import com.grupo1.pos.config.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,13 +18,13 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-    private final UsuarioService usuarioService;
+    private final UsuarioServiceImpl usuarioService;
     private final SecurityConfig securityConfig;
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Autowired
-    public AuthController(SecurityConfig securityConfig, UsuarioRepository usuarioRepository, UsuarioService usuarioService) {
+    public AuthController(SecurityConfig securityConfig, UsuarioRepository usuarioRepository, UsuarioServiceImpl usuarioService) {
         this.securityConfig = securityConfig;
         this.usuarioRepository = usuarioRepository;
         this.usuarioService = usuarioService;

@@ -1,23 +1,22 @@
 package com.grupo1.pos.service;
 
-import com.grupo1.pos.model.Producto;
-
+import com.grupo1.pos.dto.ProductoDTO;
 import java.util.List;
 import java.util.Optional;
 
 public interface ProductoService {
 
-    List<Producto> getProductos();
+    List<ProductoDTO> getProductos(); // Cambiado para retornar una lista de DTOs
 
-    Producto getProductoByNombre(String nombre);
+    ProductoDTO getProductoByNombre(String nombre); // Cambiado para retornar un DTO
 
-    Producto getProductoByCodigoBarra(String codigoBarra);
+    ProductoDTO getProductoByCodigoBarra(String codigoBarra); // Cambiado para retornar un DTO
 
-    Optional<Producto> getProductoById(Long id);
+    Optional<ProductoDTO> getProductoById(Long id); // Cambiado para retornar un Optional de DTO
 
-    Producto agregarProducto(Producto producto);
+    ProductoDTO agregarProducto(ProductoDTO productoDTO); // Recibe y retorna un DTO
 
-    Producto actualizarProducto(Long id, Producto producto);
+    ProductoDTO actualizarProducto(Long id, ProductoDTO productoDTO); // Recibe un DTO para actualizar
 
     void eliminarProducto(Long id);
 }
