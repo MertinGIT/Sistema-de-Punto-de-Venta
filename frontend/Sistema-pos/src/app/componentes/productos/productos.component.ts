@@ -4,6 +4,8 @@ import { Producto } from '../../entidades/producto';
 import { ProductosService } from '../../servicios/productos/productos.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { AppComponent } from '../../app.component';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-productos',

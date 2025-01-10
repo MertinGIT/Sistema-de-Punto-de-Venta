@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Producto } from '../../../entidades/producto';
 import { ProductosService } from '../../../servicios/productos/productos.service';
 import { Router, RouterLink } from '@angular/router';
+import { NavbarComponent } from '../../navbar/navbar.component';
 
 @Component({
   selector: 'app-agregar-producto',

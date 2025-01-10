@@ -1,0 +1,23 @@
+.container {
+    margin-top: 10%;
+  }
+  
+  .card {
+    border-radius: 10px;
+  }
+  
+  .card-header {
+    font-size: 1.5rem;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    font-weight: bold;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+  }
+  

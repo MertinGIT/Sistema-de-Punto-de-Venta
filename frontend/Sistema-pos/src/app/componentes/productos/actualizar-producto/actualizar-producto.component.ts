@@ -6,6 +6,7 @@ import { ProductosService } from '../../../servicios/productos/productos.service
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { tap, catchError, of } from 'rxjs';
 import Swal from 'sweetalert2';
+import { NavbarComponent } from '../../navbar/navbar.component';
 
 @Component({
   selector: 'app-actualizar-producto',

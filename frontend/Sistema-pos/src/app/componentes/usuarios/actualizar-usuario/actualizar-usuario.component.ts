@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { catchError, of, tap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { NavbarComponent } from '../../navbar/navbar.component';
 
 @Component({
   selector: 'app-actualizar-usuario',

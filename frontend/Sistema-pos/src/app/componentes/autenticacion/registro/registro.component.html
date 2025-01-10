@@ -1,0 +1,37 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg" style="width: 400px;">
+      <div class="card-header text-center bg-primary text-white">
+        <h4>Registro de Usuario</h4>
+      </div>
+      <div class="card-body">
+        <form>
+          <!-- Campo de correo -->
+          <div class="mb-3">
+            <label for="email" class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control" id="email" placeholder="Ingresa tu correo" required>
+          </div>
+          
+          <!-- Campo de nombre de usuario -->
+          <div class="mb-3">
+            <label for="username" class="form-label">Nombre de usuario</label>
+            <input type="text" class="form-control" id="username" placeholder="Ingresa tu nombre de usuario" required>
+          </div>
+          
+          <!-- Campo de contraseña -->
+          <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="password" placeholder="Ingresa tu contraseña" required>
+          </div>
+          
+          <!-- Botón de registro -->
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Registrarse</button>
+          </div>
+        </form>
+      </div>
+      <div class="card-footer text-center">
+        <small>¿Ya tienes cuenta? <a routerLink="/login" class="text-primary">Inicia sesión</a></small>
+      </div>
+    </div>
+  </div>
+  
