@@ -35,6 +35,10 @@ product: Producto[];
       this.router.navigate(['actualizar-producto', id]);
     }
 
+    agregarProducto() {
+      this.router.navigate(['agregar-producto']);
+    }
+
     eliminarProducto(id: number) {
       Swal.fire({
         title: '¿Estás seguro?',

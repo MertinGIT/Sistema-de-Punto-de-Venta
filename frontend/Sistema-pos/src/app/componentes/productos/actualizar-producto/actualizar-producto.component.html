@@ -1,0 +1,29 @@
+<div class="col-md-6 offset-md-3">
+    <h3 class="text-center">Edición de producto</h3>
+    <form (ngSubmit)="onSubmit()" #productoForm="ngForm">
+        <div class="form-group">
+            <label>Nombre : </label>
+            <input type="text" class="form-control" id="nombre" [(ngModel)]="producto.nombre" name="nombre"
+                placeholder="Digite nombre del producto" #nombre="ngModel" />
+
+            <label>Categoria : </label>
+            <input type="text" class="form-control" id="categoria" [(ngModel)]="producto.categoria" name="categoria"
+                placeholder="Digite categoria del producto" #categoria="ngModel" />
+
+            <label>Codigo de Barras: </label>
+            <input type="text" class="form-control" id="codigoBarras" [(ngModel)]="producto.codigoBarras"
+                name="codigoBarras" placeholder="Digite codigo de barras" #codigoBarras="ngModel" />
+
+            <label>Precio: </label>
+            <input type="text" class="form-control" id="precio" [(ngModel)]="producto.precio" name="precio"
+                placeholder="Digite precio" #precio="ngModel" />
+
+            <label>Stock: </label>
+            <input type="text" class="form-control" id="stock" [(ngModel)]="producto.stock"
+                name="stock" placeholder="Digite stock del producto" #stock="ngModel" />
+
+            <button class="btn btn-success mt-2">Guardar</button>
+            <a routerLink="/productos" class="btn btn-secondary ml-2 mt-2">Cancelar</a>
+        </div>
+    </form>
+</div>

@@ -16,21 +16,21 @@ export class ProductosService {
     return this.httpClient.get<Producto[]>(`${this.baseURL}`);
   }
 
-  registrarProductos(producto:Producto) : Observable<Object>{
-    return this.httpClient.post(`${this.baseURL}register`, producto, { responseType: 'text' });
+  agregarProducto(producto:Producto) : Observable<Object>{
+    return this.httpClient.post(`${this.baseURL}`, producto, { responseType: 'text' });
   }
 
     //este metodo sirve para actualizar el usuario
     actualizarProducto(id: number, producto: Producto): Observable<Object> {
-      return this.httpClient.put(`${this.baseURL}${id}`, producto, { responseType: 'text' });
+      return this.httpClient.put(`${this.baseURL}/${id}`, producto, { responseType: 'text' });
     }
   
     //este metodo sirve para obtener o buscar un Usuario
     obtenerProductoPorId(id: number): Observable<Producto> {
-      return this.httpClient.get<Producto>(`${this.baseURL}${id}`);
+      return this.httpClient.get<Producto>(`${this.baseURL}/${id}`);
     }
   
     eliminarProducto(id: number): Observable<Object> {
-      return this.httpClient.delete(`${this.baseURL}${id}`, { responseType: 'text' });
+      return this.httpClient.delete(`${this.baseURL}/${id}`, { responseType: 'text' });
     }
 }
