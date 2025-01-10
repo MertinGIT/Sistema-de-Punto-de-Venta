@@ -7,6 +7,7 @@ import com.grupo1.pos.model.Usuario;
 import com.grupo1.pos.repository.UsuarioRepository;
 import com.grupo1.pos.service.impl.UsuarioServiceImpl;
 import com.grupo1.pos.config.SecurityConfig;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,18 +53,20 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequestDTO request) {
+    public ResponseEntity<?> login(@RequestBody LoginRequestDTO request, HttpSession session) {
         // Buscar el usuario por email
         Usuario user = usuarioRepository.findByEmail(request.getEmail());
         if (user == null || !passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             return ResponseEntity.status(401).body("Invalid credentials");
         }
 
+        // Guardar el id del usuario en la sesión
+        session.setAttribute("usuario_id", user.getId());
+
         // Generar un token
         String token = securityConfig.generateToken(user.getEmail(), user.getRol());
         return ResponseEntity.ok(new LoginResponseDTO(token));
     }
-
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequestDTO request) {
         // Verificar si el usuario ya existe

@@ -25,11 +25,11 @@ public class Venta {
     private Usuario usuario;
 
     @NotNull
-    @Column(nullable = false)
-    private Double montoTotal;
+    @Column(name="monto_total", nullable = false)
+    private Double montoTotal = 0.0;
 
     @NotNull(message = "El método de pago es obligatorio")
-    @Column(nullable = false, length = 20)
+    @Column(name = "metodo_pago", nullable = false, length = 20)
     private String metodoPago; // Ejemplo: "efectivo", "tarjeta"
 
     @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL)
