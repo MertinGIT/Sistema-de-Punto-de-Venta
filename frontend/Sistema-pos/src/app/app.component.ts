@@ -8,9 +8,7 @@ import { RegistrarUsuarioComponent } from './componentes/usuarios/registrar-usua
   selector: 'app-root',
   standalone: true,
   imports: [
-    RouterOutlet,
-    ListaUsuariosComponent,
-    RegistrarUsuarioComponent
+    RouterOutlet
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']

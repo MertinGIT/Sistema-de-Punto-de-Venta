@@ -8,6 +8,7 @@ import com.grupo1.pos.repository.UsuarioRepository;
 import com.grupo1.pos.service.impl.UsuarioServiceImpl;
 import com.grupo1.pos.config.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,6 +39,18 @@ public class AuthController {
         List<Usuario> usuarios = this.usuarioRepository.findAll();
         return ResponseEntity.ok(usuarios);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> obtenerUsuarioPorId(@PathVariable Long id) {
+        Optional<Usuario> usuario = this.usuarioRepository.findById(id);
+
+        if (usuario.isPresent()) {
+            return ResponseEntity.ok(usuario.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario no encontrado");
+        }
+    }
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequestDTO request) {
         // Buscar el usuario por email
@@ -72,12 +85,12 @@ public class AuthController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> actualizarUsuario(@PathVariable Long id, @RequestBody RegisterRequestDTO request, @RequestHeader("Authorization") String token) {
+    public ResponseEntity<?> actualizarUsuario(@PathVariable Long id, @RequestBody RegisterRequestDTO request/*, @RequestHeader("Authorization") String token*/) {
         // Verificar si el usuario tiene rol de ADMINISTRADOR
         //System.out.println("ENtro al api");
-        if (!usuarioService.isAdmin(token)) {
+       /* if (!usuarioService.isAdmin(token)) {
             return ResponseEntity.status(403).body("Access denied: Only administrators can update users");
-        }
+        }*/
 
         // Buscar el usuario por ID
         Optional<Usuario> optionalUsuario = usuarioRepository.findById(id);
@@ -99,13 +112,13 @@ public class AuthController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminarUsuario(@PathVariable Long id, @RequestHeader("Authorization") String token) {
+    public ResponseEntity<?> eliminarUsuario(@PathVariable Long id/*, @RequestHeader("Authorization") String token*/) {
         // Verificar si el usuario tiene rol de ADMINISTRADOR
-        System.out.println("Token recibido en eliminarUsuario: " + token);
+       /* System.out.println("Token recibido en eliminarUsuario: " + token);
         if (!usuarioService.isAdmin(token)) {
             return ResponseEntity.status(403).body("Access denied: Only administrators can delete users");
         }
-
+*/
         // Verificar si el usuario existe
         Optional<Usuario> optionalUsuario = usuarioRepository.findById(id);
         if (optionalUsuario.isEmpty()) {

@@ -5,8 +5,10 @@ import { RegistrarUsuarioComponent } from './componentes/usuarios/registrar-usua
 import { ProductosComponent } from './componentes/productos/productos.component';
 import { VentasComponent } from './componentes/ventas/ventas.component';
 export const routes: Routes = [
-  { path: 'usuarios', component: ListaUsuariosComponent }, 
   { path: '', redirectTo: 'usuarios', pathMatch: 'full' },
+  { path: 'usuarios', component: ListaUsuariosComponent }, 
+  { path: 'actualizar-usuario/:id', component: ActualizarUsuarioComponent}, 
+  { path: 'usuarios', component: ListaUsuariosComponent }, 
   { path: 'productos',component : ProductosComponent},
   { path: 'ventas',component : VentasComponent}
 ];

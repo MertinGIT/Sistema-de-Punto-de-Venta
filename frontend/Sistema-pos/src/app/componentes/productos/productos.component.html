@@ -1,1 +1,29 @@
-<p>productos works!</p>
+<h2 class="text-center">Lista Productos</h2>
+<table class="table table-striped">
+  <thead class="table-dark"> <!-- Cambia "head" por "thead" -->
+    <tr>
+      <th>#</th>
+      <th>Nombre</th>
+      <th>Categoria</th>
+      <th>Codigo de Barras</th>
+      <th>Precio</th>
+      <th>Stock</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of product">
+        <td>{{ p.id }}</td>
+        <td>{{ p.nombre }}</td>
+        <td>{{ p.categoria }}</td>
+        <td>{{ p.codigoBarras }}</td>
+        <td>{{ p.precio }}</td>
+        <td>"{{ p.stock }}"</td>
+        <td>
+            <button (click)= "actualizarProducto(p.id)" class="btn btn-info">Editar</button>
+            <button (click)= "eliminarProducto(p.id)" class="btn btn-danger" style="margin-left : 10px;">Eliminar</button>
+            <!--<button (click)= "verDetallesDelEmpleado(empleado.id)" class="btn btn-primary" style="margin-left : 10px;">Detalles</button> -->    
+        </td>
+    </tr>
+  </tbody>
+</table>

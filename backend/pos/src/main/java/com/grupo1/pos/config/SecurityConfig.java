@@ -38,7 +38,7 @@ public class SecurityConfig {
                         .requestMatchers("/auth/**").permitAll() // Public routes
                      /*   .requestMatchers(HttpMethod.PUT, "/auth/**").hasAuthority("ADMINISTRADOR") // Admin only for PUT
                         .requestMatchers(HttpMethod.DELETE, "/auth/**").hasAuthority("ADMINISTRADOR") // Admin only for DELETE
-                        .anyRequest().authenticated() // Other requests require authentication*/
+                         .anyRequest().authenticated() // Other requests require authentication*/
                 )
                 .addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class); // Add JWT filter before authentication filter
 
