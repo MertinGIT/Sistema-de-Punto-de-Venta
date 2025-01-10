@@ -11,6 +11,11 @@ public class VentaDTO {
     private Double montoTotal;
     private String metodoPago;
     private List<Long> detallesIds;
+    private List<DetalleVentaDTO> detalles;
+
+    public List<DetalleVentaDTO> getDetalles() {
+        return detalles;
+    }
 
     // Getters y setters
     public Long getId() {

@@ -1,0 +1,52 @@
+<!-- Modal de edición de venta -->
+<div *ngIf="venta" class="modal d-block" tabindex="-1" role="dialog" style="display:block;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar Venta</h5>
+        <button type="button" class="close" (click)="onCancelar()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="onActualizarVenta()" #ventaForm="ngForm">
+          <div class="form-group">
+            <label>Fecha: </label>
+            <input type="date" class="form-control" [(ngModel)]="venta.fecha" name="fecha" required />
+          </div>
+
+          <div class="form-group">
+            <label>Método de Pago: </label>
+            <select class="form-control" [(ngModel)]="venta.metodoPago" name="metodoPago" required>
+              <option value="EFECTIVO">Efectivo</option>
+              <option value="TARJETA">Tarjeta</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Cantidad: </label>
+            <input type="number" class="form-control" [(ngModel)]="venta.cantidad" name="cantidad" required (ngModelChange)="calcularSubtotal()" />
+          </div>
+
+          <div class="form-group">
+            <label>Subtotal: </label>
+            <input type="number" class="form-control" [(ngModel)]="venta.subtotal" name="subtotal" readonly />
+          </div>
+
+          <div class="form-group">
+            <label>Monto Total: </label>
+            <input type="number" class="form-control" [(ngModel)]="venta.montoTotal" name="montoTotal" readonly />
+          </div>
+
+          <div class="form-group">
+            <label>IVA (10%): </label>
+            <input type="number" class="form-control" [(ngModel)]="venta.iva" name="iva" readonly />
+          </div>
+
+          <button type="submit" class="btn btn-success" [disabled]="!ventaForm.form.valid">Actualizar Venta</button>
+          <button type="button" class="btn btn-secondary ml-2" (click)="onCancelar()">Cancelar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

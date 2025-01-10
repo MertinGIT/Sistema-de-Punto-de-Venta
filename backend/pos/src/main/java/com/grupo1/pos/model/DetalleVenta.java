@@ -23,6 +23,7 @@ public class DetalleVenta {
     @Column(nullable = false)
     private Double subtotal;
 
+
     // Getters and setters
     public Long getId() {
         return id;
