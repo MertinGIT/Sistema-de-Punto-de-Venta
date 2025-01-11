@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { VentaService } from '../../servicios/ventas/venta.service';
-import { ProductosService } from '../../servicios/productos/productos.service'; // Importar el servicio de productos
+import { VentaService } from '../venta.service';
+import { ProductosService } from '../servicios/productos/productos.service'; // Importar el servicio de productos
 import Swal from 'sweetalert2';
 import { catchError, of, tap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
-import { ActualizarVentaComponent } from '../../actualizar-venta/actualizar-venta.component'; // Importar el componente
+import { ActualizarVentaComponent } from './../actualizar-venta/actualizar-venta.component'; // Importar el componente
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
@@ -83,10 +83,10 @@ export class VentaComponent implements OnInit {
   calcularMontoTotal(): void {
     console.log('Productos obtenidos desde la API:', this.productos);
     console.log('Producto ID seleccionado:', this.venta.producto_id);
-  
+
     // Asegúrate de convertir ambos valores al mismo tipo
     const producto = this.productos.find((p) => p.id === Number(this.venta.producto_id));
-  
+
     if (producto) {
       console.log('Producto encontrado:', producto);
       const cantidad = this.venta.cantidad || 0;
@@ -98,8 +98,8 @@ export class VentaComponent implements OnInit {
       this.venta.montoTotal = 0;
     }
   }
-  
-  
+
+
 
   obtenerUsuarioId(): number {
     // Obtiene el idUsuario desde el servicio
@@ -133,14 +133,14 @@ export class VentaComponent implements OnInit {
   editarVenta(venta: any): void {
     this.ventaEnEdicion = { ...venta }; // Clona la venta seleccionada para editar
   }
-  
+
   onVentaActualizada(): void {
     this.obtenerVentas(); // Refresca la lista de ventas
     this.ventaEnEdicion = null; // Cierra el modal
   }
-  
+
   onCancelarEdicion(): void {
     this.ventaEnEdicion = null; // Cierra el modal sin guardar
   }
-  
+
 }
