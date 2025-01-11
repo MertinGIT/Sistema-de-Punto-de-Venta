@@ -11,7 +11,7 @@ import { NavbarComponent } from '../../navbar/navbar.component';
 @Component({
   selector: 'app-actualizar-producto',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterLink],
+  imports: [FormsModule, CommonModule, RouterLink,NavbarComponent],
   templateUrl: './actualizar-producto.component.html',
   styleUrl: './actualizar-producto.component.css'
 })

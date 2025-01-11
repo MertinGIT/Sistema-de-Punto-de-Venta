@@ -6,23 +6,26 @@
             <h4>Iniciar Sesión</h4>
           </div>
           <div class="card-body">
-            <form>
+            <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
               <!-- Campo de Email -->
               <div class="mb-3">
                 <label for="email" class="form-label">Correo Electrónico</label>
-                <input type="email" id="email" class="form-control" placeholder="Ingresa tu correo" />
+                <input type="email" id="email" class="form-control" placeholder="Ingresa tu correo" [(ngModel)]="usuario.email" name="email" #nombre="ngModel"/>
               </div>
   
               <!-- Campo de Contraseña -->
               <div class="mb-3">
                 <label for="password" class="form-label">Contraseña</label>
-                <input type="password" id="password" class="form-control" placeholder="Ingresa tu contraseña" />
+                <input type="password" id="password" class="form-control" placeholder="Ingresa tu contraseña" [(ngModel)]="usuario.password" name="password" #nombre="ngModel"/>
               </div>
   
               <!-- Botón de Login -->
-              <div class="d-grid">
+               <div class="d-grid">
+                <button class="btn btn-primary">Ingresar</button>
+               </div>
+              <!-- <div class="d-grid">
                 <a routerLink="/usuarios" type="submit" class="btn btn-primary" >Ingresar</a>
-              </div>
+              </div> -->
             </form>
           </div>
           <div class="card-footer text-center">

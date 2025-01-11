@@ -1,4 +1,7 @@
-<div class="col-md-6 offset-md-3">
+<app-navbar></app-navbar>
+
+<div class="container">
+  <div class="col-md-6 offset-md-3">
     <h3 class="text-center">Edición de usuario</h3>
     <form (ngSubmit)="onSubmit()" #usuarioForm="ngForm">
       <div class="form-group">
@@ -100,3 +103,5 @@
       <button class="btn btn-success" [disabled]="!usuarioForm.form.valid">Guardar</button>
     </form>
   </div>
+</div>
+

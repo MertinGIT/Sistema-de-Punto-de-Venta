@@ -11,7 +11,7 @@ import { NavbarComponent } from '../../navbar/navbar.component';
 @Component({
   selector: 'app-actualizar-usuario',
   standalone: true,
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule,CommonModule,NavbarComponent],
   templateUrl: './actualizar-usuario.component.html',
   styleUrl: './actualizar-usuario.component.css'
 })

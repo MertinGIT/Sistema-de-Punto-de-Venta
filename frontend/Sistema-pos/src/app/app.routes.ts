@@ -5,9 +5,9 @@ import { RegistrarUsuarioComponent } from './componentes/usuarios/registrar-usua
 import { ProductosComponent } from './componentes/productos/productos.component';
 import { ActualizarProductoComponent } from './componentes/productos/actualizar-producto/actualizar-producto.component';
 import { AgregarProductoComponent } from './componentes/productos/agregar-producto/agregar-producto.component';
-import { VentasComponent } from './componentes/ventas/ventas.component';
 import { LoginComponent } from './componentes/autenticacion/login/login.component';
 import { RegistroComponent } from './componentes/autenticacion/registro/registro.component';
+import { VentaComponent } from './componentes/venta/venta.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'usuarios', component: ListaUsuariosComponent },
@@ -16,7 +16,7 @@ export const routes: Routes = [
   { path: 'productos',component : ProductosComponent},
   { path: 'actualizar-producto/:id', component: ActualizarProductoComponent},
   { path: 'agregar-producto', component: AgregarProductoComponent},
-  { path: 'ventas', component:VentasComponent},
+  { path: 'ventas', component:VentaComponent},
   { path: 'login', component: LoginComponent},
   { path: 'registro', component: RegistroComponent},
 ];

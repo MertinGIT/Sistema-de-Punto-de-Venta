@@ -10,7 +10,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 @Component({
   selector: 'app-productos',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,NavbarComponent],
   templateUrl: './productos.component.html',
   styleUrl: './productos.component.css'
 })

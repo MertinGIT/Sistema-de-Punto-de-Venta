@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { VentaService } from '../venta.service';
-import { ProductosService } from '../servicios/productos/productos.service'; // Importar el servicio de productos
+import { VentaService } from '../../servicios/ventas/venta.service';
+import { ProductosService } from '../../servicios/productos/productos.service'; // Importar el servicio de productos
 import Swal from 'sweetalert2';
 import { catchError, of, tap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
-import { ActualizarVentaComponent } from './../actualizar-venta/actualizar-venta.component'; // Importar el componente
+import { ActualizarVentaComponent } from '../../actualizar-venta/actualizar-venta.component'; // Importar el componente
 
 import { ActivatedRoute, Router } from '@angular/router';
 

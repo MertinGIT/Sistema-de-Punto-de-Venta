@@ -15,22 +15,25 @@ export class UsuarioService {
     return this.httpClient.get<Usuario[]>(`${this.baseURL}listar`);
   }
 
-  registrarUsuario(usuario:Usuario) : Observable<Object>{
-
+  registrarUsuario(usuario: Usuario): Observable<Object> {
     return this.httpClient.post(`${this.baseURL}register`, usuario, { responseType: 'text' });
   }
 
-    //este metodo sirve para actualizar el usuario
-    actualizarUsuario(id: number, usuario: Usuario): Observable<Object> {
-      return this.httpClient.put(`${this.baseURL}${id}`, usuario, { responseType: 'text' });
-    }
-  
-    //este metodo sirve para obtener o buscar un Usuario
-    obtenerUsuarioPorId(id: number): Observable<Usuario> {
-      return this.httpClient.get<Usuario>(`${this.baseURL}${id}`);
-    }
-  
-    eliminarUsuario(id: number): Observable<Object> {
-      return this.httpClient.delete(`${this.baseURL}${id}`, { responseType: 'text' });
-    }
+  loginUsuario(usuario: Usuario): Observable<Object> {
+    return this.httpClient.post(`${this.baseURL}login`, usuario, { responseType: 'text' });
+  }
+
+  //este metodo sirve para actualizar el usuario
+  actualizarUsuario(id: number, usuario: Usuario): Observable<Object> {
+    return this.httpClient.put(`${this.baseURL}${id}`, usuario, { responseType: 'text' });
+  }
+
+  //este metodo sirve para obtener o buscar un Usuario
+  obtenerUsuarioPorId(id: number): Observable<Usuario> {
+    return this.httpClient.get<Usuario>(`${this.baseURL}${id}`);
+  }
+
+  eliminarUsuario(id: number): Observable<Object> {
+    return this.httpClient.delete(`${this.baseURL}${id}`, { responseType: 'text' });
+  }
 }

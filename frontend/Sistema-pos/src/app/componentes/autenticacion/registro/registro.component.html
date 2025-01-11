@@ -1,37 +1,52 @@
 <div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="card shadow-lg" style="width: 400px;">
-      <div class="card-header text-center bg-primary text-white">
-        <h4>Registro de Usuario</h4>
-      </div>
-      <div class="card-body">
-        <form>
-          <!-- Campo de correo -->
-          <div class="mb-3">
-            <label for="email" class="form-label">Correo electrónico</label>
-            <input type="email" class="form-control" id="email" placeholder="Ingresa tu correo" required>
+  <div class="card shadow-lg" style="width: 400px;">
+    <div class="card-header text-center bg-primary text-white">
+      <h4>Registro de Usuario</h4>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit()" #registroForm="ngForm">
+        <!-- Campo de correo -->
+        <div class="mb-3">
+          <label for="email" class="form-label">Correo electrónico</label>
+          <input type="email" class="form-control" id="email" placeholder="Ingresa tu correo" required
+            [(ngModel)]="usuario.email" name="email" #correo="ngModel">
+        </div>
+
+        <!-- Campo de nombre de usuario -->
+        <div class="mb-3">
+          <label for="username" class="form-label">Nombre de usuario</label>
+          <input type="text" class="form-control" id="username" placeholder="Ingresa tu nombre de usuario" required
+            [(ngModel)]="usuario.nombre" name="nombre" #nombre="ngModel">
+        </div>
+
+        <!-- Campo de contraseña -->
+        <div class="mb-3">
+          <label for="password" class="form-label">Contraseña</label>
+          <input type="password" class="form-control" id="password" placeholder="Ingresa tu contraseña" required
+            [(ngModel)]="usuario.password" name="password" #password="ngModel">
+        </div>
+
+        <!-- Campo de rol -->
+        <div class="mb-3">
+          <label>Rol: </label>
+          <select class="form-control" [(ngModel)]="usuario.rol" name="rol" required #rol="ngModel">
+            <option value="VENDEDOR">VENDEDOR</option>
+          </select>
+          <div class="alert alert-danger" *ngIf="rol.invalid && (rol.dirty || rol.touched)">
+            <div *ngIf="rol.errors?.['required']">
+              Seleccione un rol
+            </div>
           </div>
-          
-          <!-- Campo de nombre de usuario -->
-          <div class="mb-3">
-            <label for="username" class="form-label">Nombre de usuario</label>
-            <input type="text" class="form-control" id="username" placeholder="Ingresa tu nombre de usuario" required>
-          </div>
-          
-          <!-- Campo de contraseña -->
-          <div class="mb-3">
-            <label for="password" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" id="password" placeholder="Ingresa tu contraseña" required>
-          </div>
-          
-          <!-- Botón de registro -->
-          <div class="d-grid">
-            <button type="submit" class="btn btn-primary">Registrarse</button>
-          </div>
-        </form>
-      </div>
-      <div class="card-footer text-center">
-        <small>¿Ya tienes cuenta? <a routerLink="/login" class="text-primary">Inicia sesión</a></small>
-      </div>
+        </div>
+
+        <!-- Botón de registro -->
+        <div class="d-grid">
+          <button class="btn btn-primary">Ingresar</button>
+        </div>
+      </form>
+    </div>
+    <div class="card-footer text-center">
+      <small>¿Ya tienes cuenta? <a routerLink="/login" class="text-primary">Inicia sesión</a></small>
     </div>
   </div>
-  
+</div>

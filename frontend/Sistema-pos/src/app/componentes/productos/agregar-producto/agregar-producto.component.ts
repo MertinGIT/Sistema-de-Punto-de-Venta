@@ -9,7 +9,7 @@ import { NavbarComponent } from '../../navbar/navbar.component';
 @Component({
   selector: 'app-agregar-producto',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterLink],
+  imports: [FormsModule, CommonModule, RouterLink,NavbarComponent],
   templateUrl: './agregar-producto.component.html',
   styleUrl: './agregar-producto.component.css'
 })
