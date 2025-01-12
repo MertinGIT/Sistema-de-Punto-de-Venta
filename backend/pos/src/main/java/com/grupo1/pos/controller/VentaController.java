@@ -25,7 +25,8 @@ import java.util.Optional;
 @RequestMapping("/api/ventas")
 
 @CrossOrigin(
-        origins = {"http://localhost:4200/"}
+        origins = {"http://localhost:4200/"},
+        allowCredentials = "true"
 )
 public class VentaController {
     @Autowired
@@ -62,8 +63,12 @@ public class VentaController {
 
     @PostMapping()
     public ResponseEntity<?> registrarVenta(HttpSession session, @RequestBody VentaDTO ventaDTO) {
-        Long usuarioId = (Long) session.getAttribute("usuario_id");
-        usuarioId = 7L; // Temporalmente forzado para pruebas
+        //Long usuarioId = (Long) session.getAttribute("usuario_id");
+       // usuarioId = 7L; // Temporalmente forzado para pruebas
+
+        // Ya que no se esta validando correctamente la autenticacion, procedo a obtener el idUsuario registrado en ventaDTO
+        Long usuarioId = ventaDTO.getUsuarioId();
+        System.out.println(usuarioId);
         if (usuarioId == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuario no autenticado");
         }

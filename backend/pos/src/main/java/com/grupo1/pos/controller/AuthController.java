@@ -65,8 +65,11 @@ public class AuthController {
 
         // Generar un token
         String token = securityConfig.generateToken(user.getEmail(), user.getRol());
-        return ResponseEntity.ok(new LoginResponseDTO(token));
+
+        // Incluir el idUsuario en la respuesta
+        return ResponseEntity.ok(new LoginResponseDTO(token, user.getId()));
     }
+
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequestDTO request) {
         // Verificar si el usuario ya existe

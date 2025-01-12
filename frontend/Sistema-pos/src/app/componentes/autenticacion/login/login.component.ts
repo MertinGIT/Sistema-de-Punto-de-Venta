@@ -21,11 +21,23 @@ export class LoginComponent {
     }
   
     verificarUsuario() {
-      this.usuarioService.loginUsuario(this.usuario).subscribe(dato => {
-        console.log(dato)
-        this.ingresar();
+      this.usuarioService.loginUsuario(this.usuario).subscribe({
+        next: (response: { token: string; idUsuario: number }) => {
+          // Guardar los datos en el servicio de autenticación
+          this.usuarioService.saveUserData(response.token, response.idUsuario);
+    
+          // Confirmar en consola
+          console.log('Usuario ID:', response.idUsuario);
+    
+          // Llamar a la función ingresar o redirigir al usuario
+          this.ingresar();
+        },
+        error: (err) => {
+          console.error('Error al verificar el usuario:', err);
+        },
       });
     }
+    
   
     ingresar() {
       this.router.navigate(['/usuarios']);

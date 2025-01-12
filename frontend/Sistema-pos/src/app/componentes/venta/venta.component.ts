@@ -8,11 +8,13 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { ActualizarVentaComponent } from '../../actualizar-venta/actualizar-venta.component'; // Importar el componente
 
 import { ActivatedRoute, Router } from '@angular/router';
+import { NavbarComponent } from '../navbar/navbar.component';
+import { UsuarioService } from '../../servicios/usuarios/usuario.service';
 
 @Component({
   selector: 'app-venta',
   standalone: true,
-  imports: [CommonModule, FormsModule, DatePipe, ActualizarVentaComponent],
+  imports: [CommonModule, FormsModule, DatePipe, ActualizarVentaComponent,NavbarComponent],
   templateUrl: './venta.component.html',
   styleUrls: ['./venta.component.css'],
 })
@@ -27,13 +29,14 @@ export class VentaComponent implements OnInit {
     cantidad: null,
     subtotal: null,
     producto_id: null,
-    usuario_id: null,
+    usuarioId: null,
   };
   mostrarFormularioVenta = false;
 
   constructor(
     private ventaService: VentaService,
-    private productosService: ProductosService  // Inyectar el servicio de productos
+    private productosService: ProductosService, // Inyectar el servicio de productos
+    private usuarioService: UsuarioService
   ) {}
 
   ngOnInit(): void {
@@ -62,7 +65,8 @@ export class VentaComponent implements OnInit {
       this.venta.subtotal = producto.precio * this.venta.cantidad;
       this.venta.montoTotal = this.venta.subtotal + this.calcularIVA(this.venta.subtotal);
     }
-    this.venta.usuario_id = this.obtenerUsuarioId();
+    this.venta.usuarioId = this.obtenerUsuarioId();
+    console.log("** Venta a enviar: ",this.venta);
 
     // Enviar la venta al servidor
     this.ventaService.registrarVenta(this.venta).subscribe(() => {
@@ -98,9 +102,22 @@ export class VentaComponent implements OnInit {
   
 
   obtenerUsuarioId(): number {
-    // Simula el usuario logueado; reemplazar con lógica real
-    return 7;
+    // Obtiene el idUsuario desde el servicio
+    const idS: string | null = this.usuarioService.getIdUsuario(); // El valor podría ser null
+  
+    if (!idS) {
+      throw new Error('Usuario no logueado o idUsuario no encontrado');
+    }
+  
+    const id: number = Number(idS);
+  
+    if (isNaN(id)) {
+      throw new Error('El idUsuario no es un número válido');
+    }
+  
+    return id;
   }
+  
 
   eliminarVenta(id: number): void {
     this.ventaService.eliminarVenta(id).subscribe(() => this.obtenerVentas());

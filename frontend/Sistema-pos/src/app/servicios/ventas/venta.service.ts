@@ -23,7 +23,7 @@ export class VentaService {
 
   // Registrar una nueva venta
   registrarVenta(venta: any): Observable<Object> {
-    return this.httpClient.post(`${this.baseURL}`, venta, { responseType: 'text' });
+    return this.httpClient.post(`${this.baseURL}`, venta, { responseType: 'text' , withCredentials: true});
   }
 
   // Actualizar una venta existente

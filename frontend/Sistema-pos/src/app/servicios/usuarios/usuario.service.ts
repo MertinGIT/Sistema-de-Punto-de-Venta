@@ -19,8 +19,12 @@ export class UsuarioService {
     return this.httpClient.post(`${this.baseURL}register`, usuario, { responseType: 'text' });
   }
 
-  loginUsuario(usuario: Usuario): Observable<Object> {
-    return this.httpClient.post(`${this.baseURL}login`, usuario, { responseType: 'text' });
+  // Método loginUsuario actualizado
+  loginUsuario(usuario: { email: string; password: string }): Observable<{ token: string; idUsuario: number }> {
+    return this.httpClient.post<{ token: string; idUsuario: number }>(
+      `${this.baseURL}login`,
+      usuario
+    );
   }
 
   //este metodo sirve para actualizar el usuario
@@ -35,5 +39,14 @@ export class UsuarioService {
 
   eliminarUsuario(id: number): Observable<Object> {
     return this.httpClient.delete(`${this.baseURL}${id}`, { responseType: 'text' });
+  }
+
+  saveUserData(token: string, idUsuario: number) {
+    localStorage.setItem('token', token);
+    localStorage.setItem('idUsuario', idUsuario.toString());
+  }
+
+  getIdUsuario() {
+    return localStorage.getItem('idUsuario');
   }
 }
