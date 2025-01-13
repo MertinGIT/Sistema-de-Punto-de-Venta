@@ -60,8 +60,9 @@ public class AuthController {
             return ResponseEntity.status(401).body("Invalid credentials");
         }
 
-        // Guardar el id del usuario en la sesión
+        // Guardar el ID en la sesión
         session.setAttribute("usuario_id", user.getId());
+        System.out.println("Usuario ID guardado en la sesión: " + user.getId());
 
         // Generar un token
         String token = securityConfig.generateToken(user.getEmail(), user.getRol());

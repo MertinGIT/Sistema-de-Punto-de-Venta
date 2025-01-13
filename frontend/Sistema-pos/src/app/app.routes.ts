@@ -8,6 +8,8 @@ import { AgregarProductoComponent } from './componentes/productos/agregar-produc
 import { LoginComponent } from './componentes/autenticacion/login/login.component';
 import { RegistroComponent } from './componentes/autenticacion/registro/registro.component';
 import { VentaComponent } from './componentes/venta/venta.component';
+import { DetalleVentaComponent } from './detalle-venta/detalle-venta.component';
+
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'usuarios', component: ListaUsuariosComponent },
@@ -18,5 +20,6 @@ export const routes: Routes = [
   { path: 'agregar-producto', component: AgregarProductoComponent},
   { path: 'ventas', component:VentaComponent},
   { path: 'login', component: LoginComponent},
+  { path: 'detalle-venta/:ventaId', component: DetalleVentaComponent },
   { path: 'registro', component: RegistroComponent},
 ];

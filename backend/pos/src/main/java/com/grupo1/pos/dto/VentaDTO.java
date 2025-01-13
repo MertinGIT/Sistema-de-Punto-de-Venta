@@ -1,5 +1,6 @@
 package com.grupo1.pos.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,12 +10,26 @@ public class VentaDTO {
     private Date fecha;
     private Long usuarioId;
     private Double montoTotal;
+    private Long producto_id;
+
+    public void setProductoId(Long producto_id) {
+        this.producto_id = producto_id;
+    }
+
+    public Long getProductoId() {
+        return producto_id;
+    }
+
+    private Long productoId;
     private String metodoPago;
     private List<Long> detallesIds;
-    private List<DetalleVentaDTO> detalles;
+    private List<DetalleVentaDTO> detalles= new ArrayList<>();
 
     public List<DetalleVentaDTO> getDetalles() {
         return detalles;
+    }
+    public void setDetalles(List<DetalleVentaDTO> detalles) {
+        this.detalles = detalles;
     }
 
     // Getters y setters

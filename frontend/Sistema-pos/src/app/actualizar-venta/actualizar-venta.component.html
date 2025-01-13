@@ -11,40 +11,100 @@
       <div class="modal-body">
         <form (ngSubmit)="onActualizarVenta()" #ventaForm="ngForm">
           <div class="form-group">
-            <label>Fecha: </label>
-            <input type="date" class="form-control" [(ngModel)]="venta.fecha" name="fecha" required />
+            <label>Fecha:</label>
+            <input
+              type="date"
+              class="form-control"
+              [(ngModel)]="venta.fecha"
+              name="fecha"
+              required
+            />
           </div>
 
           <div class="form-group">
-            <label>Método de Pago: </label>
-            <select class="form-control" [(ngModel)]="venta.metodoPago" name="metodoPago" required>
+            <label>Método de Pago:</label>
+            <select
+              class="form-control"
+              [(ngModel)]="venta.metodoPago"
+              name="metodoPago"
+              required
+            >
               <option value="EFECTIVO">Efectivo</option>
               <option value="TARJETA">Tarjeta</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label>Cantidad: </label>
-            <input type="number" class="form-control" [(ngModel)]="venta.cantidad" name="cantidad" required (ngModelChange)="calcularSubtotal()" />
+            <label>Producto:</label>
+            <select
+              class="form-control"
+              [(ngModel)]="venta.producto_id"
+              name="producto_id"
+              required
+              (change)="calcularSubtotal()"
+            >
+              <option *ngFor="let producto of productos" [value]="producto.id">
+                {{ producto.nombre }}
+              </option>
+            </select>
           </div>
 
           <div class="form-group">
-            <label>Subtotal: </label>
-            <input type="number" class="form-control" [(ngModel)]="venta.subtotal" name="subtotal" readonly />
+            <label>Cantidad:</label>
+            <input
+              type="number"
+              class="form-control"
+              [(ngModel)]="venta.cantidad"
+              name="cantidad"
+              required
+              (ngModelChange)="calcularSubtotal()"
+            />
           </div>
 
           <div class="form-group">
-            <label>Monto Total: </label>
-            <input type="number" class="form-control" [(ngModel)]="venta.montoTotal" name="montoTotal" readonly />
+            <label>Subtotal:</label>
+            <input
+              type="number"
+              class="form-control"
+              [value]="venta.subtotal"
+              readonly
+            />
           </div>
 
           <div class="form-group">
-            <label>IVA (10%): </label>
-            <input type="number" class="form-control" [(ngModel)]="venta.iva" name="iva" readonly />
+            <label>IVA (10%):</label>
+            <input
+              type="number"
+              class="form-control"
+              [value]="venta.iva"
+              readonly
+            />
           </div>
 
-          <button type="submit" class="btn btn-success" [disabled]="!ventaForm.form.valid">Actualizar Venta</button>
-          <button type="button" class="btn btn-secondary ml-2" (click)="onCancelar()">Cancelar</button>
+          <div class="form-group">
+            <label>Monto Total:</label>
+            <input
+              type="number"
+              class="form-control"
+              [value]="venta.montoTotal"
+              readonly
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="!ventaForm.form.valid"
+          >
+            Actualizar Venta
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary ml-2"
+            (click)="onCancelar()"
+          >
+            Cancelar
+          </button>
         </form>
       </div>
     </div>

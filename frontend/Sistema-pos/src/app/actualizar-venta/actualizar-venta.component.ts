@@ -29,17 +29,22 @@ export class ActualizarVentaComponent implements OnInit {
 
   obtenerProductos(): void {
     this.productosService.obtenerListaProductos().subscribe((data) => {
+      console.log("Los datos recibidos son: ",data)
       this.productos = data;
     });
   }
-
-  calcularSubtotal(): void {
-    const producto = this.productos.find((p) => p.id === Number(this.venta.producto_id));
-    if (producto) {
-      this.venta.subtotal = producto.precio * this.venta.cantidad;
-      this.venta.montoTotal = this.venta.subtotal + this.calcularIVA(this.venta.subtotal);
-    }
+calcularSubtotal(): void {
+  const producto = this.productos.find((p) => p.id === Number(this.venta.producto_id));
+  if (producto && this.venta.cantidad > 0) {
+    this.venta.subtotal = producto.precio * this.venta.cantidad;
+    this.venta.iva = this.calcularIVA(this.venta.subtotal); // Calcula el IVA
+    this.venta.montoTotal = this.venta.subtotal + this.venta.iva; // Suma IVA al subtotal
+  } else {
+    this.venta.subtotal = 0;
+    this.venta.iva = 0;
+    this.venta.montoTotal = 0;
   }
+}
 
   calcularIVA(subtotal: number): number {
     return subtotal * 0.1; // 10% IVA

@@ -1,24 +1,33 @@
 package com.grupo1.pos.controller;
 
+import com.grupo1.pos.dto.DetalleVentaDTO;
 import com.grupo1.pos.model.DetalleVenta;
+import com.grupo1.pos.model.Venta;
 import com.grupo1.pos.service.DetalleVentaService;
+import com.grupo1.pos.service.VentaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/detalle-venta")
+@CrossOrigin(
+        origins = {"http://localhost:4200/" }
+)
 public class DetalleVentaController {
 
     private final DetalleVentaService detalleVentaService;
-
+    private VentaService ventaService;
     @Autowired
-    public DetalleVentaController(DetalleVentaService detalleVentaService) {
+    public DetalleVentaController(DetalleVentaService detalleVentaService, VentaService ventaService) {
         this.detalleVentaService = detalleVentaService;
+        this.ventaService = ventaService;
     }
 
     // Obtener todos los detalles de venta
@@ -61,4 +70,40 @@ public class DetalleVentaController {
         detalleVentaService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/venta/{ventaId}")
+    public ResponseEntity<?> getDetallesVentaByVentaId(@PathVariable Long ventaId) {
+        // Usa el servicio para obtener la venta
+        Optional<Venta> ventaOpt = ventaService.findById(ventaId);
+        System.out.println("Detalles encontrados: " + ventaOpt);
+
+        if (ventaOpt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Venta no encontrada");
+        }
+
+        Venta venta = ventaOpt.get(); // Si hay al menos un elemento
+
+        List<DetalleVentaDTO> detalles = detalleVentaService.findDetallesByVentaId(ventaId)
+                .stream()
+                .map(detalle -> new DetalleVentaDTO(
+                        detalle.getId(),
+                        detalle.getCantidad(),
+                        detalle.getSubtotal(),
+                        detalle.getProducto().getId(),
+                        detalle.getVenta().getId()
+
+                ))
+                .toList();
+
+        // Construye el objeto de respuesta
+        Map<String, Object> response = new HashMap<>();
+        response.put("usuario", venta.getUsuario().getNombre());
+        response.put("metodoPago", venta.getMetodoPago());
+        response.put("fecha", venta.getFecha());
+        response.put("montoTotal", venta.getMontoTotal());
+        response.put("detalles", detalles);
+
+        return ResponseEntity.ok(response);
+    }
+
 }

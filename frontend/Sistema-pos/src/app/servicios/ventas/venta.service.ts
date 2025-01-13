@@ -21,18 +21,31 @@ export class VentaService {
     return this.httpClient.get<any>(`${this.baseURL}/${id}`);
   }
 
+  obtenerDetalleVenta(id: number): Observable<any> { 
+    return this.httpClient.get<any>(`http://localhost:8080/api/detalle-venta/venta/${id}`); 
+    }
   // Registrar una nueva venta
   registrarVenta(venta: any): Observable<Object> {
-    return this.httpClient.post(`${this.baseURL}`, venta, { responseType: 'text' , withCredentials: true});
+    return this.httpClient.post(`${this.baseURL}`, venta, { responseType: 'text'});
   }
 
   // Actualizar una venta existente
   actualizarVenta(id: number, venta: any): Observable<Object> {
-    return this.httpClient.put(`${this.baseURL}/${id}`, venta, { responseType: 'text' });
+    return this.httpClient.put(`${this.baseURL}/${id}`, venta, { responseType: 'text'});
   }
 
   // Eliminar una venta
   eliminarVenta(id: number): Observable<Object> {
     return this.httpClient.delete(`${this.baseURL}/${id}`, { responseType: 'text' });
+  }
+
+
+
+  obtenerProductoPorId(id: number): Observable<any> {
+    return this.httpClient.get<any>(`http://localhost:8080/api/productos/${id}`);
+  }
+
+  obtenerUsuarioPorId(id: number): Observable<any> {
+    return this.httpClient.get<any>(`http://localhost:8080/auth/${id}`);
   }
 }

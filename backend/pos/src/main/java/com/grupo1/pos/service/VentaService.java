@@ -22,4 +22,6 @@ public interface VentaService {
     VentaDTO actualizarVenta(Long id, VentaDTO ventaDTO);
 
     void eliminarVenta(Long id);
+
+    Optional<Venta> findById(Long id);
 }

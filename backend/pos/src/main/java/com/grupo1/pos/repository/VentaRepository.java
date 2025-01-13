@@ -12,4 +12,6 @@ public interface VentaRepository extends JpaRepository<Venta, Long> {
     List<Venta> findVentasByFechaBetween(Date fechaDesde, Date fechaHasta);
 
     List<Venta> findVentasByMetodoPago(String metodoPago);
+
+    void deleteById(Long id);
 }

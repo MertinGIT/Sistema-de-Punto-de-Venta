@@ -4,15 +4,17 @@ public class DetalleVentaDTO {
 
     private Long id;
     private Long ventaId;
-    private Long productoId;
+    private Long producto_id;
     private Integer cantidad;
     private Double subtotal;
     private Double iva10;
     private Double iva5;
-
     // Getters y setters
     public Long getId() {
         return id;
+    }
+
+    public DetalleVentaDTO() {
     }
 
     public void setId(Long id) {
@@ -28,11 +30,11 @@ public class DetalleVentaDTO {
     }
 
     public Long getProductoId() {
-        return productoId;
+        return producto_id;
     }
 
-    public void setProductoId(Long productoId) {
-        this.productoId = productoId;
+    public void setProductoId(Long producto_id) {
+        this.producto_id = producto_id;
     }
 
     public Integer getCantidad() {
@@ -49,6 +51,14 @@ public class DetalleVentaDTO {
 
     public void setSubtotal(Double subtotal) {
         this.subtotal = subtotal;
+    }
+
+    public DetalleVentaDTO( Long id,Integer cantidad, Double subtotal,Long producto_id, Long ventaId) {
+        this.cantidad = cantidad;
+        this.id = id;
+        this.subtotal = subtotal;
+        this.producto_id = producto_id;
+        this.ventaId = ventaId;
     }
 
     public Double getIva10() {

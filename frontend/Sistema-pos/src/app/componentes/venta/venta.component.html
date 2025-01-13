@@ -1,125 +1,127 @@
 <app-navbar></app-navbar>
 
 <div class="col-md-8 offset-md-2">
-    <!-- Botón para abrir el formulario de venta -->
-    <button class="btn btn-primary mb-4" (click)="mostrarFormularioVenta = !mostrarFormularioVenta">
-      {{ mostrarFormularioVenta ? 'Cancelar' : 'Venta' }}
-    </button>
-  
-    <!-- Formulario para Agregar Venta -->
-    <div *ngIf="mostrarFormularioVenta">
-      <form (ngSubmit)="onSubmit()" #ventaForm="ngForm" class="mb-4">
-        <div class="form-group">
-          <label>Fecha:</label>
-          <input
-            type="date"
-            class="form-control"
-            id="fecha"
-            [(ngModel)]="venta.fecha"
-            name="fecha"
-            required
-            #fecha="ngModel"
-          />
-        </div>
-  
-        <div class="form-group">
-          <label>Método de Pago:</label>
-          <select
-            class="form-control"
-            [(ngModel)]="venta.metodoPago"
-            name="metodo_pago"
-            required
-            #metodo_pago="ngModel"
-          >
-            <option value="EFECTIVO">Efectivo</option>
-            <option value="TARJETA">Tarjeta</option>
-          </select>
-        </div>
-  
-        <div class="form-group">
-          <label>Producto:</label>
-          <select
-            class="form-control"
-            [(ngModel)]="venta.producto_id"
-            name="producto_id"
-            required
-          >
-            <option *ngFor="let producto of productos" [value]="producto.id">
-              {{ producto.nombre }} - ${{ producto.precio }}
-            </option>
-          </select>
-        </div>
-  
-        <div class="form-group">
-          <label>Cantidad:</label>
-          <input
-            type="number"
-            class="form-control"
-            [(ngModel)]="venta.cantidad"
-            name="cantidad"
-            required
-            min="1"
-            (ngModelChange)="calcularMontoTotal()"
-          />
-        </div>
-  
-        <div class="form-group">
-          <label>Subtotal:</label>
-          <input
-            type="number"
-            class="form-control"
-            [(ngModel)]="venta.subtotal"
-            name="subtotal"
-            readonly
-          />
-        </div>
-  
-        <div class="form-group">
-          <label>Monto Total:</label>
-          <input
-            type="number"
-            class="form-control"
-            [(ngModel)]="venta.montoTotal"
-            name="montoTotal"
-            readonly
-          />
-        </div>
-  
-        <button class="btn btn-success" [disabled]="!ventaForm.form.valid">Guardar Venta</button>
-      </form>
-    </div>
-  
-    <!-- Tabla de Ventas -->
-    <h4 class="text-center">Lista de Ventas</h4>
-    <table class="table table-bordered table-striped">
-      <thead class="thead-dark">
-        <tr>
-          <th>ID</th>
-          <th>Fecha</th>
-          <th>Método de Pago</th>
-          <th>Monto Total</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let v of ventas">
-          <td>{{ v.id }}</td>
-          <td>{{ v.fecha | date: 'short' }}</td>
-          <td>{{ v.metodoPago }}</td>
-          <td>{{ v.montoTotal | currency }}</td>
-          <td>
-            <button class="btn btn-info btn-sm" (click)="verDetallesVenta(v.id)">Detalles</button>
-            <button class="btn btn-warning btn-sm" (click)="editarVenta(v)">Editar</button>
-            <button class="btn btn-danger btn-sm" (click)="eliminarVenta(v.id)">Eliminar</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <app-actualizar-venta
-  *ngIf="ventaEnEdicion"
-  [venta]="ventaEnEdicion"
-  (actualizarVentaEvent)="onVentaActualizada()"
-  (cancelarEvent)="onCancelarEdicion()"
-></app-actualizar-venta>
+  <!-- Botón para abrir el formulario de venta -->
+  <button class="btn btn-primary mb-4" (click)="mostrarFormularioVenta = !mostrarFormularioVenta">
+    {{ mostrarFormularioVenta ? 'Cancelar' : 'Venta' }}
+  </button>
+
+  <!-- Formulario para Agregar Venta -->
+  <div *ngIf="mostrarFormularioVenta">
+    <form (ngSubmit)="onSubmit()" #ventaForm="ngForm" class="mb-4">
+      <div class="form-group">
+        <label>Fecha:</label>
+        <input
+          type="date"
+          class="form-control"
+          id="fecha"
+          [(ngModel)]="venta.fecha"
+          name="fecha"
+          required
+          #fecha="ngModel"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Método de Pago:</label>
+        <select
+          class="form-control"
+          [(ngModel)]="venta.metodoPago"
+          name="metodo_pago"
+          required
+          #metodo_pago="ngModel"
+        >
+          <option value="EFECTIVO">Efectivo</option>
+          <option value="TARJETA">Tarjeta</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Producto:</label>
+        <select
+          class="form-control"
+          [(ngModel)]="detalleSeleccionado.producto_id"
+          name="productoId"
+          required
+          (change)="calcularSubtotal(detalleSeleccionado)"
+        >
+          <option *ngFor="let producto of productos" [value]="producto.id">
+            {{ producto.nombre }} - ${{ producto.precio }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Cantidad:</label>
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="venta.cantidad"
+          name="cantidad"
+          required
+          min="1"
+          (ngModelChange)="calcularMontoTotal()"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Subtotal:</label>
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="venta.subtotal"
+          name="subtotal"
+          readonly
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Monto Total:</label>
+        <input
+          type="number"
+          class="form-control"
+          [(ngModel)]="venta.montoTotal"
+          name="montoTotal"
+          readonly
+        />
+      </div>
+
+      <button class="btn btn-success" [disabled]="!ventaForm.form.valid">Guardar Venta</button>
+    </form>
   </div>
 
+  <!-- Tabla de Ventas -->
+  <h4 class="text-center">Lista de Ventas</h4>
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>ID</th>
+        <th>Fecha</th>
+        <th>Método de Pago</th>
+        <th>Monto Total</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let v of ventas">
+        <td>{{ v.id }}</td>
+        <td>{{ v.fecha | date: 'short' }}</td>
+        <td>{{ v.metodoPago }}</td>
+        <td>{{ v.montoTotal | currency }}</td>
+        <td>
+          <button class="btn btn-info btn-sm" (click)="verDetallesVenta(v.id)">Detalles</button>
+          <button class="btn btn-warning btn-sm" (click)="editarVenta(v)">Editar</button>
+          <button class="btn btn-danger btn-sm" (click)="eliminarVenta(v.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal de Actualización de Venta -->
+  <app-actualizar-venta
+    *ngIf="ventaEnEdicion"
+    [venta]="ventaEnEdicion"
+    (actualizarVentaEvent)="onVentaActualizada()"
+    (cancelarEvent)="onCancelarEdicion()"
+  ></app-actualizar-venta>
+</div>

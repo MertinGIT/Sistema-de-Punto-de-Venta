@@ -5,6 +5,7 @@ import com.grupo1.pos.repository.DetalleVentaRepository;
 import com.grupo1.pos.service.DetalleVentaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +21,9 @@ public class DetalleVentaServiceImpl implements DetalleVentaService {
         this.detalleVentaRepository = detalleVentaRepository;
     }
 
+    public List<DetalleVenta> findDetallesByVentaId(Long ventaId) {
+        return detalleVentaRepository.findByVentaId(ventaId);
+    }
     @Override
     public List<DetalleVenta> findAll() {
         return detalleVentaRepository.findAll();
@@ -34,7 +38,7 @@ public class DetalleVentaServiceImpl implements DetalleVentaService {
     public DetalleVenta save(DetalleVenta detalleVenta) {
         return detalleVentaRepository.save(detalleVenta);
     }
-
+    @Transactional
     @Override
     public void deleteById(Long id) {
         detalleVentaRepository.deleteById(id);

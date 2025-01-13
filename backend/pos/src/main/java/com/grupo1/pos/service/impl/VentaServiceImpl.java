@@ -41,7 +41,9 @@ public class VentaServiceImpl implements VentaService {
         return ventaRepository.findById(id)
                 .map(ventaMapper::toDTO);
     }
-
+    public Optional<Venta> findById(Long id) {
+        return ventaRepository.findById(id); // Asegúrate de que el repositorio está configurado correctamente.
+    }
     @Override
     public List<VentaDTO> getVentasByFechaBetween(Date fechaInicial, Date fechaFinal) {
         return ventaRepository.findVentasByFechaBetween(fechaInicial, fechaFinal).stream()

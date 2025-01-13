@@ -2,6 +2,8 @@ package com.grupo1.pos.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
